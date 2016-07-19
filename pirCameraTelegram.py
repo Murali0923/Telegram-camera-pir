@@ -35,9 +35,11 @@ try:
     if Current_State==1 and Previous_State==0:
       # PIR is triggered
       print "  Motion detected!"
-      # Record previous state
+      # Take the image and save it in folder /home/pi folder with name photo.jpg
       os.system('fswebcam -r 640x360 /home/pi/photo.jpg')
+      # start the telegram and echo the command to send photo to user
       os.system('/home/pi/tg/bin/telegram-cli -k server.pub -WR -e "send_photo user_Number /home/pi/photo.jpg"')
+      # Record previous state
       Previous_State=1
       Previous_State=1
     elif Current_State==0 and Previous_State==1:
